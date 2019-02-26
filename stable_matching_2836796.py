@@ -30,7 +30,7 @@ def stable_matching(nMen, nWomen, prefMen, prefWomen):
                 freeMen.remove(m)
                 freeMen.append(mPrime)
     engaged.sort()
-    print(engaged)
+    return engaged
 
 def main():
     prefMen = []
@@ -56,7 +56,11 @@ def main():
             prefWomen.append(list(map(int, row)))
             count += 1
     #perform a stable matching
-    stable_matching(nMen, nWomen, prefMen, prefWomen)
+    couples = stable_matching(nMen, nWomen, prefMen, prefWomen)
+
+    with open("output_"+str(nMen)+".txt", "w") as file:
+        for couple in couples:
+            file.write(','.join(map(str, couple))+'\n')
 
 if __name__ == "__main__":
     main()
